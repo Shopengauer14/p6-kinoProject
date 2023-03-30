@@ -1,0 +1,59 @@
+{% extends '../base.html' %}
+
+{% block title %}Все фильмы{% endblock %}
+
+{% block content %}
+    <div class="all-movies" id="all-movies">
+        <div class="container">
+            <h1 class="mb-4">Все фильмы</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>Поиск</h3>
+                            <form action="{% url 'allMoviesPage' %}" class="mb-5">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <input class="form-control" name="search" type="search" placeholder="Название фильма" aria-label="default input example">
+                                    </div>
+                                    <div class="col-2">
+                                        <button class="btn btn-danger"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                            <h3>Фильтр</h3>
+                            <div class="dropdown">
+                                <button class="dropbtn>"><a href="{% url 'allMoviesPage' %}" style="text-decoration: none; color: black;">Все жанры</a></button>
+                                <div class="dropdown-content">
+                                {% for genre in genres %}
+                                <a href="{% url 'filterMoviesPage' slug=genre.slug %}">{{ genre.genreName }}</a>
+                                {% endfor %}
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        {% for movie in movies %}
+                        <div class="col-4">
+                            <div class="card mb-4" style="height: 350px; background: url('{{ movie.poster }}'); background-size: cover;">
+                                <div class="card-body">
+                                    <h3 style="color: white;">{{ movie.movieName }}</h3>
+                                    <h5 style="color: white;">{{ movie.rating }}</h5>
+                                    <a href="{% url 'movieDetailPage' pk=movie.pk %}" class="btn btn-danger">Смотреть</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+<h3>{{ movie.movieName }}</h3>
+                                    <h5>{{ movie.rating }}</h5>
+                                    <a href="{% url 'movieDetailPage' pk=movie.pk %}" class="btn btn-danger">Смотреть</a>
